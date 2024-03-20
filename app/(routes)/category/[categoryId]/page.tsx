@@ -1,3 +1,4 @@
+import getCategories from "@/actions/get-categories";
 import getCategory from "@/actions/get-category";
 import getProducts from "@/actions/get-products";
 import ProductCard from "@/components/product-card";
@@ -8,12 +9,19 @@ interface CategoryProductsPageProps {
     categoryId: string;
   };
 }
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  return categories.map((category) => ({
+    params: {
+      categoryId: category.id,
+    },
+  }));
+}
 
 export async function generateMetadata({
   params,
 }: CategoryProductsPageProps): Promise<Metadata> {
   const category = await getCategory(params.categoryId);
-  console.log(category.name);
   return {
     title: category.name,
   };

@@ -5,6 +5,7 @@ import HomeHero from "@/components/home-hero";
 import ProductsList from "@/components/products-list";
 import Steps from "@/components/steps";
 import Container from "@/components/ui/container";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const revalidate = 0;
