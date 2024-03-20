@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Oxanium } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/footer";
-import NavBar from "./components/navbar";
+import NavBar from "@/components/navbar";
+import Footer from "@/components/footer";
 
-const font = Poppins({
+const font = Oxanium({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "RPSHOP",
+  title: {
+    default: "RPShop",
+    template: "%s - RPShop",
+  },
   description: "Cheapest RP anywhere",
 };
 
