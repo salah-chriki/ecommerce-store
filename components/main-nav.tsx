@@ -17,15 +17,26 @@ const MainNav = ({ data }: MainNavProps) => {
     active: pathName === `/category/${route.id}`,
   }));
   return (
-    <nav className="mx-6 flex justify-between space-x-4 lg:space-x-6">
+    <nav className="mx-6 hidden justify-between space-x-4 md:flex lg:space-x-6">
+      <Link
+        href={"/"}
+        className={cn(
+          " text-base font-medium transition-colors hover:text-buttonColor2",
+          pathName === `/`
+            ? "inline-block bg-gradient-to-r from-buttonColor2 to-buttonColor bg-clip-text text-transparent"
+            : "text-muted",
+        )}
+      >
+        Home
+      </Link>
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            "hover:text-buttonColor2 text-base font-medium transition-colors",
+            "text-base font-medium transition-colors hover:text-buttonColor2",
             route.active
-              ? "from-buttonColor2 inline-block bg-gradient-to-r to-buttonColor bg-clip-text text-transparent"
+              ? "inline-block bg-gradient-to-r from-buttonColor2 to-buttonColor bg-clip-text text-transparent"
               : "text-muted",
           )}
         >
@@ -35,9 +46,9 @@ const MainNav = ({ data }: MainNavProps) => {
       <Link
         href={"/all"}
         className={cn(
-          " hover:text-buttonColor2 text-base font-medium transition-colors",
+          " text-base font-medium transition-colors hover:text-buttonColor2",
           pathName === `/all`
-            ? "from-buttonColor2 inline-block bg-gradient-to-r to-buttonColor bg-clip-text text-transparent"
+            ? "inline-block bg-gradient-to-r from-buttonColor2 to-buttonColor bg-clip-text text-transparent"
             : "text-muted",
         )}
       >
@@ -46,9 +57,9 @@ const MainNav = ({ data }: MainNavProps) => {
       <Link
         href={"/contact-us"}
         className={cn(
-          "hover:text-buttonColor2 text-base font-medium transition-colors",
-          pathName === `/contact`
-            ? "from-buttonColor2 inline-block bg-gradient-to-r to-buttonColor bg-clip-text text-transparent"
+          "text-base font-medium transition-colors hover:text-buttonColor2",
+          pathName === `/contact-us`
+            ? "inline-block bg-gradient-to-r from-buttonColor2 to-buttonColor bg-clip-text text-transparent"
             : "text-muted",
         )}
       >

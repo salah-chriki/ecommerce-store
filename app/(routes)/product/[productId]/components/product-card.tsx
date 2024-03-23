@@ -2,11 +2,11 @@
 
 import { Product } from "@/types";
 import Image from "next/image";
-import Currency from "./currency";
 import { useRouter } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 import { MouseEventHandler } from "react";
 import useCart from "@/hooks/use-cart";
+import Currency from "@/components/currency";
 
 interface ProductCardProps {
   product: Product;
@@ -19,10 +19,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
     router.push(`/product/${product.id}`);
   };
 
-  const onAddToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.stopPropagation();
-    cart.addItem({ product, quantity: 1 });
-  };
   return (
     <article
       key={product.id}
@@ -30,7 +26,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     >
       <div
         onClick={handleClick}
-        className="group relative block h-52 w-full cursor-pointer overflow-hidden rounded-t-md object-cover object-center dark:bg-cardColor"
+        className="group relative block h-56 w-full cursor-pointer overflow-hidden rounded-t-md object-cover object-center dark:bg-cardColor"
       >
         <Image src={product.imageUrl} alt={product.name} fill />
       </div>
@@ -42,9 +38,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Currency key={product.id} value={product.price} />
         <div className="flex flex-wrap justify-between space-x-2 pt-3 text-xs dark:text-gray-400">
           <button
-            onClick={onAddToCart}
+            onClick={() => cart.addItem({ product, quantity: 1 })}
             type="button"
-            className="hover:bg-hoverColor flex w-full items-center justify-center rounded-md bg-gradient-to-r from-buttonColor2 to-buttonColor p-3 px-3 font-sans font-bold tracking-wide dark:dark:text-black"
+            className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-buttonColor2 to-buttonColor p-3 px-3 font-sans font-bold tracking-wide hover:bg-hoverColor dark:dark:text-black"
           >
             <ShoppingCart className="mr-2" width={15} height={15} />
             Add To Cart

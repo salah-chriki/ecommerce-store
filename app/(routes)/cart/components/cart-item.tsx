@@ -54,16 +54,16 @@ const CartItem = ({ data }: CartItemProps) => {
                 <button
                   disabled={data.quantity === 1}
                   onClick={() => cart.removeItemQuantity(data.product.id)}
-                  className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-buttonColor hover:text-white"
+                  className="flex items-center justify-center rounded-l-md bg-gray-400 px-4 transition hover:bg-buttonColor hover:text-white"
                 >
                   -
                 </button>
-                <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs font-bold uppercase transition">
+                <div className="flex w-full items-center justify-center bg-gray-300 px-4 text-xs font-bold uppercase transition">
                   {data.quantity}
                 </div>
                 <button
                   onClick={() => cart.addItem(data)}
-                  className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-buttonColor hover:text-white"
+                  className="flex items-center justify-center rounded-r-md bg-gray-400 px-4 transition hover:bg-buttonColor hover:text-white"
                 >
                   +
                 </button>

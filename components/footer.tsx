@@ -6,7 +6,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="dark: divide-y divide-gray-100 divide-opacity-5 px-4 pt-8 dark:bg-footerColor">
-      <div className="container mx-auto flex flex-col items-center justify-between space-y-8 px-24 py-5 lg:flex-row lg:space-y-0">
+      <div className="container mx-auto flex flex-col items-center justify-between space-y-8 px-24 pb-10 lg:flex-row lg:space-y-0">
         <div className="grid items-start lg:w-1/3">
           <a
             rel="noopener noreferrer"

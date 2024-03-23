@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/types";
-import ProductCard from "./product-card";
+import ProductCard from "../app/(routes)/product/[productId]/components/product-card";
 import Button from "./ui/button";
 import { redirect, useParams, useRouter } from "next/navigation";
 
@@ -22,7 +22,7 @@ const ProductsList = ({ title, products, hideButton }: ProductsListProps) => {
         <h3 className="text-3xl font-bold">{title}</h3>
         <button
           onClick={handleClick}
-          className={` hover:bg-hoverColor mr-6 rounded-md px-4 py-2 font-semibold dark:bg-buttonColor dark:text-black ${
+          className={` mr-6 rounded-md px-4 py-2 font-semibold hover:bg-hoverColor dark:bg-buttonColor dark:text-black ${
             hideButton ? "hidden" : ""
           }`}
         >

@@ -1,5 +1,4 @@
 import { CartItem, Product } from "@/types";
-import { it } from "node:test";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -28,10 +27,10 @@ const useCart = create(
           return toast("Item already in cart.", {
             icon: "🛒",
             style: {
-              borderRadius: "12px",
+              borderRadius: "5px",
               backgroundImage:
-                "linear-gradient(315deg, #A355F6 15%, #2B62EB 90%)",
-              color: "#fff",
+                "linear-gradient(315deg, #A355F6 10%, #2B62EB 90%)",
+              color: "#FDEEDA",
             },
           });
         }
@@ -41,10 +40,10 @@ const useCart = create(
         toast("Item added to cart.", {
           icon: "🛒",
           style: {
-            borderRadius: "12px",
+            borderRadius: "5px",
             backgroundImage:
-              "linear-gradient(315deg, #A355F6 15%, #2B62EB 90%)",
-            color: "#fff",
+              "linear-gradient(315deg, #A355F6 10%, #2B62EB 90%)",
+            color: "#FDEEDA",
           },
         });
       },
@@ -57,10 +56,10 @@ const useCart = create(
         toast("Item removed from cart.", {
           icon: "🛒",
           style: {
-            borderRadius: "12px",
+            borderRadius: "5px",
             backgroundImage:
-              "linear-gradient(315deg, #A355F6 15%, #2B62EB 90%)",
-            color: "#fff",
+              "linear-gradient(315deg, #A355F6 10%, #2B62EB 90%)",
+            color: "#FDEEDA",
           },
         });
       },
@@ -75,10 +74,10 @@ const useCart = create(
             return toast("Item quantity decreased.", {
               icon: "🛒",
               style: {
-                borderRadius: "12px",
+                borderRadius: "5px",
                 backgroundImage:
-                  "linear-gradient(315deg, #A355F6 15%, #2B62EB 90%)",
-                color: "#fff",
+                  "linear-gradient(315deg, #A355F6 10%, #2B62EB 90%)",
+                color: "#FDEEDA",
               },
             });
           }

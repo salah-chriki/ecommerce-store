@@ -1,5 +1,5 @@
 import getProducts from "@/actions/get-products";
-import ProductCard from "@/components/product-card";
+import ProductCard from "@/app/(routes)/product/[productId]/components/product-card";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
