@@ -3,13 +3,13 @@ import BannerItem from "./banner-item";
 
 const Banner = () => {
   return (
-    <section className="m-4 md:m-8 bg-bannerColor px-4 py-6 rounded-md sm: mx-10">
+    <section className="sm: m-4 mx-10 rounded-md bg-bannerColor px-4 py-6 md:m-8">
       <div className="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <BannerItem
           title="Fast Delivery"
           description="fast delivery of your oredrs"
         >
-          <Truck />
+          <Truck className="text-white" />
         </BannerItem>
         <BannerItem title="100% Money Back" description="strong refund policy">
           <HandCoins />

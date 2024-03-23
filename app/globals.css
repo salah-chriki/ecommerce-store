@@ -7,11 +7,11 @@
 html,
 body{
   background-color: var(--main-background-color);
-  color: #FDEEDA; 
+  color: #D6D5C9; 
 }
 
 
 :root {
   height: 100%;
-  --main-background-color:#17171C;
+  --main-background-color:#0C091C;
 }

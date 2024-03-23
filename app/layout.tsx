@@ -3,6 +3,7 @@ import { Oxanium } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/navbar";
 import Footer from "@/components/footer";
+import ToastProvider from "@/providers/toast-provider";
 
 const font = Oxanium({
   subsets: ["latin"],
@@ -10,8 +11,8 @@ const font = Oxanium({
 
 export const metadata: Metadata = {
   title: {
-    default: "RPShop",
-    template: "%s - RPShop",
+    default: "RPSHOP",
+    template: "%s - RPSHOP",
   },
   description: "Cheapest RP anywhere",
 };
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <ToastProvider />
         <NavBar />
         {children}
         <Footer />

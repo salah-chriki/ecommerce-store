@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="divide-y divide-muted divide-opacity-5 px-4 pt-8 dark:bg-bannerColor dark:text-gray-100">
+    <footer className="dark: divide-y divide-gray-100 divide-opacity-5 px-4 pt-8 dark:bg-footerColor">
       <div className="container mx-auto flex flex-col items-center justify-between space-y-8 px-24 py-5 lg:flex-row lg:space-y-0">
         <div className="grid items-start lg:w-1/3">
           <a
@@ -14,49 +14,40 @@ const Footer = () => {
             className="flex justify-center space-x-3 lg:justify-start"
           >
             <Image src="/favicon.ico" alt="RPSHOP" width={30} height={25} />
-            <span className=" self-center text-2xl font-semibold text-muted ">
+            <span className=" self-center text-2xl font-semibold  ">
               RPSHOP
             </span>
           </a>
         </div>
         <div className="grid grid-cols-1 gap-x-3 gap-y-8 text-sm sm:grid-cols-3 lg:w-2/3">
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50">Need Help?</h3>
+            <h3 className="tracki uppercase">Need Help?</h3>
             <ul className="space-y-1">
               <li>
-                <Link
-                  href={"/contact-us"}
-                  className="text-muted hover:text-buttonColor"
-                >
+                <Link href={"/contact-us"} className=" hover:text-buttonColor">
                   Contact Us
                 </Link>
               </li>
 
               <li>
-                <Link
-                  href={"/faqs"}
-                  className="text-muted hover:text-buttonColor"
-                >
+                <Link href={"/faqs"} className=" hover:text-buttonColor">
                   FAQs
                 </Link>
               </li>
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50">Legal</h3>
+            <h3 className="tracki uppercase ">Legal</h3>
             <ul className="space-y-1">
               <li>
-                <Link
-                  href={"/privacy"}
-                  className="text-muted hover:text-buttonColor"
-                >
+                <Link href={"/privacy"} className=" hover:text-buttonColor">
                   Privacy
                 </Link>
               </li>
               <li>
                 <Link
                   href={"/terms-and-conditions"}
-                  className="text-muted hover:text-buttonColor"
+                  className=" hover:text-buttonColor"
                 >
                   Terms of service
                 </Link>
@@ -64,7 +55,7 @@ const Footer = () => {
               <li>
                 <Link
                   href={"/return-refund-policy"}
-                  className="text-muted hover:text-buttonColor"
+                  className=" hover:text-buttonColor"
                 >
                   Refunds & Returns
                 </Link>
@@ -73,7 +64,7 @@ const Footer = () => {
           </div>
 
           <div className="space-y-3">
-            <div className="uppercase dark:text-gray-50">Social media</div>
+            <div className="uppercase ">Social media</div>
             <div className="flex justify-start space-x-3">
               <a
                 rel="noopener noreferrer"

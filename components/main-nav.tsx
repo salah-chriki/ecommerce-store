@@ -17,14 +17,16 @@ const MainNav = ({ data }: MainNavProps) => {
     active: pathName === `/category/${route.id}`,
   }));
   return (
-    <nav className="flex justify-between space-x-4 mx-6 lg:space-x-6">
+    <nav className="mx-6 flex justify-between space-x-4 lg:space-x-6">
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            "text-base font-medium transition-colors hover:text-buttonColor",
-            route.active ? "text-buttonColor" : "text-muted"
+            "hover:text-buttonColor2 text-base font-medium transition-colors",
+            route.active
+              ? "from-buttonColor2 inline-block bg-gradient-to-r to-buttonColor bg-clip-text text-transparent"
+              : "text-muted",
           )}
         >
           {route.label}
@@ -33,8 +35,10 @@ const MainNav = ({ data }: MainNavProps) => {
       <Link
         href={"/all"}
         className={cn(
-          "text-base font-medium transition-colors hover:text-buttonColor",
-          pathName === `/all` ? "text-buttonColor" : "text-muted"
+          " hover:text-buttonColor2 text-base font-medium transition-colors",
+          pathName === `/all`
+            ? "from-buttonColor2 inline-block bg-gradient-to-r to-buttonColor bg-clip-text text-transparent"
+            : "text-muted",
         )}
       >
         All
@@ -42,8 +46,10 @@ const MainNav = ({ data }: MainNavProps) => {
       <Link
         href={"/contact-us"}
         className={cn(
-          "text-base font-medium transition-colors hover:text-buttonColor",
-          pathName === `/contact` ? "text-buttonColor" : "text-muted"
+          "hover:text-buttonColor2 text-base font-medium transition-colors",
+          pathName === `/contact`
+            ? "from-buttonColor2 inline-block bg-gradient-to-r to-buttonColor bg-clip-text text-transparent"
+            : "text-muted",
         )}
       >
         Contact Us

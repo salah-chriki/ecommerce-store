@@ -26,16 +26,16 @@ const Faqs = () => {
     },
   ];
   return (
-    <section className="relative z-20 overflow-hidden  pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[40px]">
+    <section className="dark:bg-dark relative z-20  overflow-hidden pb-12 pt-10 lg:pb-[90px] lg:pt-[40px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="mx-auto mb-[60px] max-w-[620px] text-center lg:mb-20">
-              <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
+            <div className="mx-2 mb-[60px] max-w-[620px] text-center sm:mx-auto lg:mb-20">
+              <h2 className="text-dark mb-4 text-3xl font-bold sm:text-[40px]/[48px] dark:text-white">
                 Frequently Asked{" "}
                 <span className="text-buttonColor">Questions</span>
               </h2>
-              <p className="text-base text-body-color dark:text-dark-6">
+              <p className="text-body-color dark:text-dark-6 text-base">
                 Still have questions, check out our contact page to see if we
                 can answer them
               </p>
@@ -44,7 +44,7 @@ const Faqs = () => {
         </div>
 
         <div className="-mx-4 flex flex-wrap">
-          <div className="w-full lg:px-48 lg:mx-12 mx-6 px-6">
+          <div className="mx-6 w-full px-6 lg:mx-12 lg:px-48">
             {faqsList.map((faq, index) => (
               <FaqsCard key={index} header={faq.header} text={faq.text} />
             ))}

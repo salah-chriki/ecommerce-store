@@ -22,7 +22,7 @@ const ProductsList = ({ title, products, hideButton }: ProductsListProps) => {
         <h3 className="text-3xl font-bold">{title}</h3>
         <button
           onClick={handleClick}
-          className={` mr-6 rounded-md px-4 py-2 font-semibold hover:bg-orange-400 dark:bg-buttonColor dark:text-black ${
+          className={` hover:bg-hoverColor mr-6 rounded-md px-4 py-2 font-semibold dark:bg-buttonColor dark:text-black ${
             hideButton ? "hidden" : ""
           }`}
         >

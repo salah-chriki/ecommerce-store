@@ -15,3 +15,7 @@ export interface Product {
   imageUrl: string;
   category: Category;
 }
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
