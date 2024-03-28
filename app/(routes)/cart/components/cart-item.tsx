@@ -29,7 +29,6 @@ const CartItem = ({ data }: CartItemProps) => {
           width={180}
           height={100}
         />
-
         <div className="flex w-full flex-col justify-between pb-4">
           <div className="flex w-full justify-between space-x-2 pb-2">
             <div className="space-y-1">

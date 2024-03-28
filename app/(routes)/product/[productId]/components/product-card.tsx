@@ -52,29 +52,3 @@ const ProductCard = ({ product }: ProductCardProps) => {
 };
 
 export default ProductCard;
-
-{
-  /* <div className=" min-w-72 md:min-w-20 md:max-w-60 lg:max-w-80 rounded-md shadow-md dark:dark:bg-cardColor dark:dark:text-gray-100 ">
-        <div
-          onClick={handleClick}
-          className="group relative block overflow-hidden cursor-pointer  object-cover object-center w-full rounded-t-md h-52 dark:dark:bg-cardColor"
-        >
-          <Image src={product.imageUrl} alt={product.name} fill />
-        </div>
-        <div className="flex flex-col justify-between p-4 space-y-6">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-semibold tracking-wide">
-              {product.name}{" "}
-            </h2>
-            <p className="text-sm text-muted">{product.category.name}</p>
-            <Currency value={product.price} />{" "}
-          </div>
-          <button
-            type="button"
-            className="flex items-center justify-center w-full p-2 font-semibold tracking-wide rounded-md dark:dark:bg-violet-400 dark:dark:text-gray-900 hover:bg-violet-300"
-          >
-            Add To Cart
-          </button>
-        </div>
-      </div> */
-}

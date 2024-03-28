@@ -24,7 +24,7 @@ const useCart = create(
         if (index !== -1) {
           currentItems[index].quantity += 1;
           set({ cartItems: [...currentItems] });
-          return toast("Item already in cart.", {
+          return toast("Item quantity increased.", {
             icon: "🛒",
             style: {
               borderRadius: "5px",

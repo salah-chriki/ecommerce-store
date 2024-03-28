@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ToastProvider from "@/providers/toast-provider";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const font = Oxanium({
   subsets: ["latin"],
