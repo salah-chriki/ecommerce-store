@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import { toast } from "react-hot-toast";
 
 import useCart from "@/hooks/use-cart";
 import { CartItem } from "@/types";

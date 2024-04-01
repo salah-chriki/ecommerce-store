@@ -18,7 +18,9 @@ const FormField = ({
       {...register(name, { valueAsNumber })}
     />
     {error && (
-      <span className="error-message text-red-300">{error.message}</span>
+      <span className="error-message text-sm text-red-300">
+        {error.message}
+      </span>
     )}
   </>
 );

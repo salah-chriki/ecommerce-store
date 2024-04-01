@@ -5,13 +5,10 @@ import { useEffect, useState } from "react";
 import Container from "@/components/ui/container";
 import useCart from "@/hooks/use-cart";
 
-import {
-  PayPalButtons,
-  PayPalScriptProvider,
-  usePayPalScriptReducer,
-} from "@paypal/react-paypal-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import CartItem from "./cart-item";
 import Summary from "./summary";
+import PayPalButtonsComponent from "../../complete-order/[orderId]/components/paypal-buttons";
 
 interface CartPayProps {
   initialOptions: {
@@ -24,7 +21,6 @@ interface CartPayProps {
 const CartPay = ({ initialOptions }: CartPayProps) => {
   const [isMounted, setIsMounted] = useState(false);
   const cart = useCart();
-  const client = process.env.PAYPAL_CLIENT_ID || "";
 
   useEffect(() => {
     setIsMounted(true);
@@ -49,6 +45,7 @@ const CartPay = ({ initialOptions }: CartPayProps) => {
                     <CartItem key={item.product.id} data={item} />
                   ))}
                 </ul>
+                <PayPalButtonsComponent />
               </div>
               <Summary />
             </>
