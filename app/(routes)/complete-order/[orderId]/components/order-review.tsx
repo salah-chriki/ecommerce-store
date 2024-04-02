@@ -10,34 +10,28 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OrderCompleted from "./order-completed";
 import Currency from "@/components/currency";
+import { set } from "react-hook-form";
 
-interface OrderReviewProps {
-  initialOptions: {
-    clientId: string;
-    currency: string;
-    intent: string;
-  };
-}
-const OrderReview = ({ initialOptions }: OrderReviewProps) => {
-  const { orderId } = useParams();
-  const searchParams = useSearchParams();
-  const cart = useCart();
+const style = { layout: "vertical" };
 
-  const totalPrice = cart.cartItems
-    .reduce((total, item) => {
-      return total + Number(item.product.price * item.quantity);
-    }, 0)
-    .toFixed(2);
+const URL = `${process.env.NEXT_PUBLIC_API_URL}/checkout`;
 
+const OrderReview = () => {
+  const [{ isPending }] = usePayPalScriptReducer();
+  const [showSpinner, setShowSpinner] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
-  const [error, setError] = useState(false);
+  const params = useParams();
+  const searchParams = useSearchParams();
   const [displayPaypalButtons, setDisplayPaypalButtons] = useState(true);
-  const [{ options }, dispatch] = usePayPalScriptReducer();
-
+  const cart = useCart();
+  const totalPrice = cart.cartItems.reduce(
+    (total, item) => total + item.product.price * item.quantity,
+    0,
+  );
+  const [disable, setDisable] = useState(false);
   useEffect(() => {
-    dispatch({ type: "resetOptions", value: initialOptions });
-    if (cart.cartItems.length === 0) {
-      setDisplayPaypalButtons(false);
+    if (!cart.cartItems.length) {
+      setDisable(true);
     }
   }, [cart.cartItems]);
 
@@ -49,36 +43,25 @@ const OrderReview = ({ initialOptions }: OrderReviewProps) => {
       value: item.product.price,
     },
   }));
-  const createOrder = async (data: any, actions: any) => {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            items: items,
-            amount: {
-              currency_code: "EUR",
-              value: totalPrice,
-              breakdown: {
-                item_total: {
-                  currency_code: "EUR",
-                  value: totalPrice,
-                },
-              },
-            },
-            intent: "CAPTURE",
-          },
-        ],
-        application_context: {
-          brand_name: "RPSHOP",
-          shipping_preference: "NO_SHIPPING",
-        },
-      })
-      .then((data: any) => data.json())
-      .then((order: any) => order.id);
-  };
+  async function createOrder() {
+    // replace this url with your server
 
-  const onApprove = (data: any, actions: any) => {
+    const res = await fetch(`${URL}/create-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: items,
+      }),
+    });
+    const data = await res.json();
+    return data.id;
+  }
+  async function onApprove(data: any, actions: any) {
+    // replace this url with your server
     console.log("orderId onApprove", data);
+    const orderId = params.orderId;
     return actions.order.capture().then(async (details: any) => {
       toast.success("Successful payment.", {
         icon: "🛒",
@@ -95,26 +78,16 @@ const OrderReview = ({ initialOptions }: OrderReviewProps) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ orderId }),
+          body: JSON.stringify({ orderId, isPaid }),
         });
         cart.removeAll();
         setDisplayPaypalButtons(false);
       } catch (error) {
-        setError(true);
+        console.log("error", error);
       }
     });
-  };
-  const onError = (err: Record<string, unknown>) => {
-    setError(true);
-    toast.error("payment error", {
-      icon: "🛒",
-      style: {
-        background: "#d62828",
-        borderRadius: "5px",
-        color: "#003049",
-      },
-    });
-  };
+  }
+
   return (
     <>
       {isPaid ? (
@@ -124,35 +97,18 @@ const OrderReview = ({ initialOptions }: OrderReviewProps) => {
           <h2 className="text-2xl font-semibold">Order Details</h2>
           <div className="space-y-2 pt-4">
             <div>
-              <div className="flex justify-between">
-                <span>Full name:</span>
+              <div className="flex justify-start">
+                <span>Full name:&nbsp;</span>
                 <span>{searchParams.get("name")}</span>
               </div>
-              <div className="flex justify-between">
-                <span>Email:</span>
+              <div className="flex justify-start">
+                <span>Email:&nbsp;</span>
                 <span>{searchParams.get("email")}</span>
               </div>
-              <div className="flex justify-between">
-                <span>OPGG:</span>
+              <div className="flex justify-start">
+                <span>OPGG:&nbsp;</span>
                 <span>{searchParams.get("opgg")}</span>
               </div>
-              <div className="flex items-center space-x-2 text-xs">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  className="mt-1 h-3 w-3 fill-current dark:text-violet-600"
-                >
-                  <path d="M485.887,263.261,248,25.373A31.791,31.791,0,0,0,225.373,16H64A48.055,48.055,0,0,0,16,64V225.078A32.115,32.115,0,0,0,26.091,248.4L279.152,486.125a23.815,23.815,0,0,0,16.41,6.51q.447,0,.9-.017a23.828,23.828,0,0,0,16.79-7.734L486.581,296.479A23.941,23.941,0,0,0,485.887,263.261ZM295.171,457.269,48,225.078V64A16.019,16.019,0,0,1,64,48H225.373L457.834,280.462Z"></path>
-                  <path d="M148,96a52,52,0,1,0,52,52A52.059,52.059,0,0,0,148,96Zm0,72a20,20,0,1,1,20-20A20.023,20.023,0,0,1,148,168Z"></path>
-                </svg>
-                <span className="dark:text-gray-600">
-                  Spend $20.00, get 20% off
-                </span>
-              </div>
-            </div>
-            <div className="flex justify-between">
-              <span>Discount</span>
-              <span>-$4.30</span>
             </div>
           </div>
           <ul className="flex flex-col space-y-2 pt-4">
@@ -187,15 +143,28 @@ const OrderReview = ({ initialOptions }: OrderReviewProps) => {
                 </span>
               </div>
               <div>
-                {displayPaypalButtons ? (
-                  <PayPalButtons
-                    onApprove={onApprove}
-                    onError={onError}
-                    createOrder={createOrder}
-                  />
-                ) : (
-                  <div className="text-center">Payment completed</div>
-                )}
+                {" "}
+                <PayPalScriptProvider
+                  options={{
+                    clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,
+                    components: "buttons",
+                    currency: "EUR",
+                  }}
+                >
+                  {displayPaypalButtons ? (
+                    <>
+                      {showSpinner && isPending && <div className="spinner" />}
+                      <PayPalButtons
+                        style={{ layout: "vertical" }} // Fix: Change the type of the `style` object to match the expected type
+                        disabled={disable}
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                      />
+                    </>
+                  ) : (
+                    <div className="text-center">Payment completed</div>
+                  )}{" "}
+                </PayPalScriptProvider>
               </div>
             </div>
           </div>

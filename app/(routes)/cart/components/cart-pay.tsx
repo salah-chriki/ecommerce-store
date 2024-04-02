@@ -45,7 +45,6 @@ const CartPay = ({ initialOptions }: CartPayProps) => {
                     <CartItem key={item.product.id} data={item} />
                   ))}
                 </ul>
-                <PayPalButtonsComponent />
               </div>
               <Summary />
             </>
