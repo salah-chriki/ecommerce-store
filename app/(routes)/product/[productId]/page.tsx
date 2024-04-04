@@ -49,13 +49,13 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="-mx-4 flex flex-col md:flex-row">
             <div className="px-4 md:flex-1">
-              <div className="mb-4 h-[460px] w-[580px]  rounded-lg">
+              <div className="mb-4 h-[360px] w-[480px]  rounded-lg">
                 <Image
                   className="h-full w-full object-cover"
                   src={product.imageUrl}
                   alt={product.name}
-                  width={500}
-                  height={460}
+                  width={400}
+                  height={360}
                 />
               </div>
             </div>

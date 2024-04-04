@@ -21,15 +21,18 @@ const CartItem = ({ data }: CartItemProps) => {
   };
 
   return (
-    <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
+    <li className="flex flex-col pt-4 sm:flex-row sm:justify-between">
       <div className="flex w-full space-x-2 sm:space-x-4">
-        <Image
-          src={data.product.imageUrl}
-          alt={data.product.name}
-          className=" flex-shrink-0 rounded object-cover outline-none  dark:border-transparent "
-          width={180}
-          height={100}
-        />
+        <div className="mb-4 h-[100px] w-[180px]  rounded-lg">
+          <Image
+            className="h-full w-full object-cover"
+            src={data.product.imageUrl}
+            alt={data.product.name}
+            width={180}
+            height={100}
+          />
+        </div>
+
         <div className="flex w-full flex-col justify-between pb-4">
           <div className="flex w-full justify-between space-x-2 pb-2">
             <div className="space-y-1">
@@ -42,12 +45,12 @@ const CartItem = ({ data }: CartItemProps) => {
             </div>
 
             <div className="mr-4 text-right">
-              <p className="text-lg font-semibold">
+              <span className="text-lg font-semibold">
                 <Currency value={data.product.price} />
-              </p>
-              <p className="text-sm line-through dark:text-gray-600">
+              </span>
+              <span className="text-sm line-through dark:text-gray-600">
                 <Currency value={beforePrice} />
-              </p>
+              </span>
             </div>
             <div className="sm:order-1">
               <div className="mx-auto flex h-8 items-stretch text-gray-600">

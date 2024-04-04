@@ -41,11 +41,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </span>
         </div>
       </div>
-      <div className="mb-4 flex items-center justify-start">
+      <div className="mb-4 flex items-center justify-start ">
         <div className="mr-2 ">
-          <span>quantity :</span>
+          <span className="font-bold">quantity :</span>
         </div>
-        <div className="mb-3 flex h-8 w-1/3 items-stretch text-gray-600">
+        <div className="mb-3 flex h-8 w-1/4 items-stretch text-gray-600">
           <button
             disabled={quantity === 1}
             onClick={() => setQuantity(quantity - 1)}

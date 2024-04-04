@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OrderCompleted from "./order-completed";
 import Currency from "@/components/currency";
-import { set } from "react-hook-form";
 
 const style = { layout: "vertical" };
 
@@ -30,8 +29,10 @@ const OrderReview = () => {
   );
   const [disable, setDisable] = useState(false);
   useEffect(() => {
-    if (!cart.cartItems.length) {
+    if (cart.cartItems.length === 0) {
       setDisable(true);
+    } else {
+      setDisable(false);
     }
   }, [cart.cartItems]);
 
@@ -93,7 +94,7 @@ const OrderReview = () => {
       {isPaid ? (
         <OrderCompleted />
       ) : (
-        <div className="mx-auto my-6 flex max-w-md flex-col space-y-4 divide-y p-6 sm:w-96 sm:p-10 dark:divide-gray-300 dark:bg-bannerColor dark:text-mutedPrimary">
+        <div className="mx-auto mt-24 flex max-w-lg flex-col space-y-4 divide-y p-6 sm:w-96 sm:p-10  dark:divide-gray-300 dark:bg-bannerColor dark:text-mutedPrimary">
           <h2 className="text-2xl font-semibold">Order Details</h2>
           <div className="space-y-2 pt-4">
             <div>
@@ -143,28 +144,19 @@ const OrderReview = () => {
                 </span>
               </div>
               <div>
-                {" "}
-                <PayPalScriptProvider
-                  options={{
-                    clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,
-                    components: "buttons",
-                    currency: "EUR",
-                  }}
-                >
-                  {displayPaypalButtons ? (
-                    <>
-                      {showSpinner && isPending && <div className="spinner" />}
-                      <PayPalButtons
-                        style={{ layout: "vertical" }} // Fix: Change the type of the `style` object to match the expected type
-                        disabled={disable}
-                        createOrder={createOrder}
-                        onApprove={onApprove}
-                      />
-                    </>
-                  ) : (
-                    <div className="text-center">Payment completed</div>
-                  )}{" "}
-                </PayPalScriptProvider>
+                {displayPaypalButtons ? (
+                  <>
+                    {showSpinner && isPending && <div className="spinner" />}
+                    <PayPalButtons
+                      style={{ layout: "vertical" }} // Fix: Change the type of the `style` object to match the expected type
+                      disabled={disable}
+                      createOrder={createOrder}
+                      onApprove={onApprove}
+                    />
+                  </>
+                ) : (
+                  <div className="text-center">Payment completed</div>
+                )}
               </div>
             </div>
           </div>

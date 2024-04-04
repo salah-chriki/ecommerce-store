@@ -40,7 +40,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <button
             onClick={() => cart.addItem({ product, quantity: 1 })}
             type="button"
-            className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-buttonColor2 to-buttonColor p-3 px-3 font-sans font-bold tracking-wide hover:bg-hoverColor dark:dark:text-black"
+            className="flex w-1/2 items-center justify-center rounded-md bg-gradient-to-r from-buttonColor2 to-buttonColor p-3 px-3 font-sans font-bold tracking-wide hover:bg-hoverColor dark:dark:text-black"
           >
             <ShoppingCart className="mr-2" width={15} height={15} />
             Add To Cart

@@ -1,8 +1,6 @@
 "use server";
 import { Resend } from "resend";
 
-const URL = `${process.env.NEXT_PUBLIC_API_URL}/contact`;
-
 interface ContactData {
   name: string;
   email: string;

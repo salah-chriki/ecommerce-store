@@ -1,18 +1,20 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import Currency from "@/components/currency";
 import useCart from "@/hooks/use-cart";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormField from "@/components/ui/form-field";
 import { FormData, UserSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import OrderReview from "../../complete-order/[orderId]/components/order-review";
 
 const Summary = () => {
   const router = useRouter();
   const cart = useCart();
+  const [showSpinner, setShowSpinner] = useState(false);
   const [inputDisabled, setInputDisabled] = useState(false);
   const totalPrice = cart.cartItems
     .reduce((total, item) => {
@@ -30,12 +32,15 @@ const Summary = () => {
   });
 
   const [isPaid, setIsPaid] = useState(false);
+  const [toCheckout, setToCheckout] = useState(false);
 
   const cartItems = cart.cartItems;
 
   const onSubmit = async (data: FormData) => {
     try {
+      setShowSpinner(true);
       setInputDisabled(true);
+      setToCheckout(true);
 
       const { name, email, opgg } = data;
       const response = await fetch(
@@ -61,7 +66,11 @@ const Summary = () => {
   };
 
   return (
-    <div className="  flex max-h-screen w-full flex-col space-y-4 divide-y p-6 sm:p-10 lg:w-1/3 dark:divide-gray-700 dark:bg-bannerColor dark:text-gray-100">
+    // <>
+    //   {toCheckout ? (
+    //     <OrderReview />
+    //   ) : (
+    <div className="flex max-h-screen w-full flex-col space-y-4 divide-y rounded-md p-6 sm:p-10 lg:w-1/3 dark:divide-gray-700 dark:bg-bannerColor dark:text-gray-100">
       <h2 className="text-2xl font-semibold">Your details</h2>
       <div className="space-y-2 pt-4">
         <form className="container ">
@@ -116,24 +125,10 @@ const Summary = () => {
           </div>
 
           <div>
-            {/* {displayPaypalButtons ? (
-              isPending ? (
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="h-4 w-4 animate-pulse rounded-full dark:bg-buttonColor"></div>
-                  <div className="h-4 w-4 animate-pulse rounded-full dark:bg-buttonColor"></div>
-                  <div className="h-4 w-4 animate-pulse rounded-full dark:bg-buttonColor"></div>
-                </div>
-              ) : (
-                <PayPalButtons
-                  onApprove={onApprove}
-                  onError={onError}
-                  createOrder={createOrder}
-                />
-              )
-            ) : ( */}
             <div className="flex justify-between space-x-4">
               <button
                 onClick={() => router.back()}
+                disabled={showSpinner}
                 type="button"
                 className="rounded-md border px-6 py-2 dark:border-buttonColor2"
               >
@@ -142,16 +137,25 @@ const Summary = () => {
               <button
                 onClick={handleSubmit(onSubmit)}
                 type="submit"
-                className="rounded-md border bg-gradient-to-r from-buttonColor2 to-buttonColor px-6 py-2 dark:border-buttonColor2 dark:text-gray-900"
+                className="w-36 rounded-md border bg-gradient-to-r from-buttonColor2 to-buttonColor px-6 py-2 dark:border-buttonColor2 dark:text-gray-900"
               >
-                <span className="sr-only sm:not-sr-only">Checkout</span>
+                {showSpinner ? (
+                  // <div className="w-40">
+                  <div className="mx-auto h-6 w-6 animate-spin rounded-full border-4 border-solid border-blue-200 border-t-transparent"></div>
+                ) : (
+                  // </div>
+                  <span className="sr-only font-bold text-violet-200 sm:not-sr-only">
+                    Checkout
+                  </span>
+                )}
               </button>
             </div>
-            {/* )} */}
           </div>
         </div>
       </div>
     </div>
+    //   )}
+    // </>
   );
 };
 

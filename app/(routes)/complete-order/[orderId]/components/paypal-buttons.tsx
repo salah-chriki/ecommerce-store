@@ -75,22 +75,14 @@ export default function PayPalButtonsComponent() {
   }
 
   return (
-    <PayPalScriptProvider
-      options={{
-        clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,
-        components: "buttons",
-        currency: "EUR",
-      }}
-    >
-      <>
-        {showSpinner && isPending && <div className="spinner" />}
-        <PayPalButtons
-          style={{ layout: "vertical" }} // Fix: Change the type of the `style` object to match the expected type
-          disabled={false}
-          createOrder={createOrder}
-          onApprove={onApprove}
-        />
-      </>
-    </PayPalScriptProvider>
+    <>
+      {showSpinner && isPending && <div className="spinner" />}
+      <PayPalButtons
+        style={{ layout: "vertical" }} // Fix: Change the type of the `style` object to match the expected type
+        disabled={false}
+        createOrder={createOrder}
+        onApprove={onApprove}
+      />
+    </>
   );
 }
