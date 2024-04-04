@@ -5,13 +5,13 @@ import Image from "next/image";
 import useCart from "@/hooks/use-cart";
 import { CartItem } from "@/types";
 import Currency from "@/components/currency";
-import { Trash, X } from "lucide-react";
+import { X } from "lucide-react";
 
 interface CartItemProps {
   data: CartItem;
 }
 
-const CartItem = ({ data }: CartItemProps) => {
+const CartLine = ({ data }: CartItemProps) => {
   const cart = useCart();
 
   const beforePrice = data.product.price * 1.3;
@@ -88,4 +88,4 @@ const CartItem = ({ data }: CartItemProps) => {
   );
 };
 
-export default CartItem;
+export default CartLine;

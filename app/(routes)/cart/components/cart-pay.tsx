@@ -6,9 +6,8 @@ import Container from "@/components/ui/container";
 import useCart from "@/hooks/use-cart";
 
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import CartItem from "./cart-item";
 import Summary from "./summary";
-import PayPalButtonsComponent from "../../complete-order/[orderId]/components/paypal-buttons";
+import CartLine from "./cart-line";
 
 interface CartPayProps {
   initialOptions: {
@@ -42,7 +41,7 @@ const CartPay = ({ initialOptions }: CartPayProps) => {
                 <h2 className="text-center text-xl font-semibold">Your cart</h2>
                 <ul className="flex flex-col divide-y dark:divide-gray-700">
                   {cart.cartItems.map((item) => (
-                    <CartItem key={item.product.id} data={item} />
+                    <CartLine key={item.product.id} data={item} />
                   ))}
                 </ul>
               </div>
